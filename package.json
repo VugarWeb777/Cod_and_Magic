@@ -1,0 +1,24 @@
+{
+  "name": "code_and_magic",
+  "version": "1.0.0",
+  "description": "game project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint js/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VugarWeb777/Cod_and_Magic.git"
+  },
+  "author": "VugarWeb777",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VugarWeb777/Cod_and_Magic/issues"
+  },
+  "homepage": "https://github.com/VugarWeb777/Cod_and_Magic#readme",
+  "devDependencies": {
+    "eslint": "^5.14.0",
+    "eslint-config-htmlacademy": "^0.5.2"
+  }
+}
