@@ -1,9 +1,6 @@
 /* eslint-disable no-console,no-unused-vars */
 "use strict";
 
-var userDialog = document.querySelector(".setup");
-userDialog.classList.remove("hidden");
-
 document.querySelector(".setup-similar").classList.remove("hidden");
 
 var similarListElement = document.querySelector(".setup-similar-list");
@@ -15,7 +12,7 @@ var similarWizardTemplete = document.querySelector("#similar-wizard-template")
 var firstName = ["Иван","Хуан Себастьян","Мария","Кристоф","Виктор","Юлия","Люпита","Вашингтон"];
 var surnName = ["Де марья","Верон","Мирабелла","Вальц","Онопко","Топольницкая","Нионго","Ирвинг"];
 var coatColor = ["rgb(101,137,164)","rgb(241,43,107)","rgb(146,100,161)","rgb(56,159,117)","rgb(215,210,55)","rgb(0,0,0)","rgb(255,0,0)"];
-var eyesColor = ["black","red","blue","yellow","green"];
+var eyesColor = ["black","red","blue","yellow","green","gray","brown","pink"];
 
 class Wizards {
 	constructor (wizardName,coatColor,eyesColor){
@@ -65,3 +62,46 @@ function append() {
 	similarListElement.appendChild(fragment);
 }
 append();
+
+
+//Модальное окно настройки персонажа
+
+var OpenSetup = document.querySelector(".setup-open");
+var userSetup =document.querySelector(".setup");
+var btnCloseSetup = document.querySelector(".setup-close");
+const ESC = 27;
+const ENTER = 13;
+
+function EscClose(evt) {
+	if (evt.keyCode === ESC && !document.activeElement.classList.contains("setup-user-name")){
+		userSetup.classList.add("hidden");
+	}
+}
+
+function ShowUserSetup(evt) {
+	userSetup.classList.remove("hidden");
+	document.addEventListener("keydown",EscClose);
+}
+
+function CloseSetup (){
+	if (!userSetup.classList.contains("hidden")){
+		userSetup.classList.add("hidden");
+	}
+	document.removeEventListener("keydown",EscClose);
+}
+
+OpenSetup.addEventListener("click",ShowUserSetup);
+
+OpenSetup.addEventListener("keydown",function (evt) {
+	if (evt.keyCode === ENTER) {
+		ShowUserSetup();
+	}
+});
+
+btnCloseSetup.addEventListener("click",CloseSetup);
+
+btnCloseSetup.addEventListener("keydown",function (evt) {
+	if (evt.keyCode === ENTER) {
+		CloseSetup();
+	}
+});
