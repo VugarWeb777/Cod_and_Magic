@@ -72,25 +72,17 @@ var btnCloseSetup = document.querySelector(".setup-close");
 const ESC = 27;
 const ENTER = 13;
 
-
-
-
 function EscClose(evt) {
 	if (evt.keyCode === ESC && !document.activeElement.classList.contains("setup-user-name")){
 		userSetup.classList.add("hidden");
 	}
 }
 
+
+//Open WizardSetupPopup
 function ShowUserSetup() {
 	userSetup.classList.toggle("hidden");
 	document.addEventListener("keydown",EscClose);
-}
-
-function CloseSetup (){
-	if (!userSetup.classList.contains("hidden")){
-		userSetup.classList.add("hidden");
-	}
-	document.removeEventListener("keydown",EscClose);
 }
 
 OpenSetup.addEventListener("click",ShowUserSetup);
@@ -101,6 +93,14 @@ OpenSetup.addEventListener("keydown",function (evt) {
 	}
 });
 
+//Close WizardSetupPopup
+function CloseSetup (){
+	if (!userSetup.classList.contains("hidden")){
+		userSetup.classList.add("hidden");
+	}
+	document.removeEventListener("keydown",EscClose);
+}
+
 btnCloseSetup.addEventListener("click",CloseSetup);
 
 btnCloseSetup.addEventListener("keydown",function (evt) {
@@ -109,6 +109,8 @@ btnCloseSetup.addEventListener("keydown",function (evt) {
 	}
 });
 
+
+//change wizard custom color
 var coat = document.querySelector(".setup-wizard");
 var fireball = document.querySelector(".setup-fireball-wrap");
 var colorFireBall = ["ee4830","#30a8ee","#5ce6c0","#e848d5","#e6e848"];
