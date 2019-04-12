@@ -870,3 +870,12 @@ input[type=radio]:checked + .review-mark-label {
   left: 0;
   top: 0;
 }
+.modal-info {
+  width: 400px;
+  margin: 0 auto;
+  background: cornflowerblue;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
