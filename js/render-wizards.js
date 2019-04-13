@@ -2,49 +2,53 @@
 "use strict";
 
 (function () {
-	var userDialog =  document.querySelector(".setup-similar");
+	var setup = document.querySelector(".setup");
+	var userDialog = document.querySelector(".setup-similar");
 	userDialog.classList.remove("hidden");
 
 	var similarListElement = document.querySelector(".setup-similar-list");
 	var similarWizardTemplete = document.querySelector("#similar-wizard-template").content.querySelector(".setup-similar-item");
 
-	function createWizards () {
-		for (var i = 0; i <4; i++) {
-			var wizardObj = new window.wizards.obj(window.wizards.getName(),window.wizards.getCoatColor(),window.wizards.getEyesColor());
-			window.wizards.wizardsList.push(wizardObj);
-		}
-		return window.wizards.wizardsList;
-	}
-
-	createWizards();
-
+	window.getRandomIndex = function (arr) {
+		return Math.floor(Math.random() * arr.length);
+	};
 
 	var renderWizard = function (wizard) {
 		var wizardElement = similarWizardTemplete.cloneNode(true);
-		wizardElement.querySelector(".setup-similar-label").textContent = wizard.wizardName;
-		wizardElement.querySelector(".wizard-coat").style.fill = wizard.coatColor;
-		wizardElement.querySelector(".wizard-eyes").style.fill = wizard.eyesColor;
+		wizardElement.querySelector(".setup-similar-label").textContent = wizard.name;
+		wizardElement.querySelector(".wizard-coat").style.fill = wizard.colorCoat;
+		wizardElement.querySelector(".wizard-eyes").style.fill = wizard.colorEyes;
 		return wizardElement;
 	};
 
-	function append() {
+	var successHandler = function (wizard) {
 		var fragment = document.createDocumentFragment();
-		for (var i = 0; i < window.wizards.wizardsList.length; i++) {
-			fragment.appendChild(renderWizard(window.wizards.wizardsList[i]));
+		for (var i = 0; i < 4; i++) {
+			fragment.appendChild(renderWizard(wizard[window.getRandomIndex(wizard)]));
 		}
 		similarListElement.appendChild(fragment);
-	}
+	};
 
-	append();
+	var errorHandler = function (errorMessage) {
+		var node = document.createElement("div");
+		node.classList.add("error");
+
+		node.textContent = errorMessage;
+		document.body.insertAdjacentElement("afterbegin", node);
+	};
+
+	window.backend.load(successHandler,errorHandler);
 
 
 	/*Отправка формы ajax*/
-	/*var form = document.forms["wizard-form"];
+	var form = document.forms["wizard-form"];
+
 
 	form.addEventListener("submit",function (evt) {
-		window.upload(new FormData(form),function () {
-			userDialog.classList.add("hidden");
+		window.backend.save(new FormData(form),function () {
+			setup.classList.add("hidden");
+			console.log("форма успешно отправлена!");
 		});
 		evt.preventDefault();
-	});*/
+	});
 })();
