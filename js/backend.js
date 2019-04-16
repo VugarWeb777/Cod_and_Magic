@@ -10,11 +10,13 @@
 
 
 			xhr.addEventListener("load", function () {
-				if (xhr.status === 200) {
-					onLoad(xhr.response);
-				} else {
-					onError("Статус ответа " + xhr.status + " " + xhr.statusText);
+				switch (xhr.status) {
+				case 200 : onLoad(xhr.response);
+					break;
+
+				default: throw new Error("Статус ответа " + xhr.status + " " + xhr.statusText);
 				}
+
 			});
 
 			xhr.addEventListener("error", function () {
